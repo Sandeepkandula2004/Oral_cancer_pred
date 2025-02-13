@@ -34,7 +34,7 @@ export default function FormComponent() {
     e.preventDefault();
 
     try {
-        const response = await fetch("http://localhost:3000/api/predict", {
+        const response = await fetch("https://oral-cancer-pred.onrender.com/api/predict", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
@@ -51,6 +51,7 @@ export default function FormComponent() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-96 p-6 bg-white shadow-lg rounded-lg">
+        <h1 className="text-xl font-semibold text-center mb-4">Oral Cancer Prediction</h1>
         <h2 className="text-xl font-semibold text-center mb-4">Enter Patient Details</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <select name="gender" onChange={handleChange} required>
