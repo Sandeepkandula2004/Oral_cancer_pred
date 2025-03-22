@@ -33,6 +33,14 @@ export default function FormComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+        const response = await fetch("https://oral-cancer-pred.onrender.com/api/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+        setPrediction(result.prediction); // Store the prediction in state
       const response = await fetch("https://localhost:3000/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,23 +55,17 @@ export default function FormComponent() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50 p-6">
-      <div className="w-full max-w-md p-6 bg-white shadow-md rounded-lg border border-gray-200">
-        <h1 className="text-2xl font-semibold text-center mb-6">Oral Cancer Prediction</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="block">
-            <span className="text-gray-700">Gender</span>
-            <select name="gender" onChange={handleChange} required className="w-full mt-1 p-2 border rounded-md">
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </label>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="w-96 p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-xl font-semibold text-center mb-4">Enter Patient Details</h2>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <select name="gender" onChange={handleChange} required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
 
-          <label className="block">
-            <span className="text-gray-700">Age</span>
-            <input type="number" name="age" placeholder="Enter age" onChange={handleChange} required className="w-full mt-1 p-2 border rounded-md" />
-          </label>
+          <input type="number" name="age" placeholder="Age" onChange={handleChange} required />
 
           <label className="block">
             <span className="text-gray-700">Tobacco Use</span>
