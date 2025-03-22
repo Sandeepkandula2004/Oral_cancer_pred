@@ -38,14 +38,6 @@ export default function FormComponent() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
         });
-
-        const result = await response.json();
-        setPrediction(result.prediction); // Store the prediction in state
-      const response = await fetch("https://localhost:3000/api/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
       const result = await response.json();
       setPrediction(result.prediction);
     } catch (error) {
