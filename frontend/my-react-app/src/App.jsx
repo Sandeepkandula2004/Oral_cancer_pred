@@ -33,7 +33,7 @@ export default function FormComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://oral-cancer-pred.onrender.com/api/predict", {
+      const response = await fetch("https://oral-cancer-prediction.onrender.com/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
